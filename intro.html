@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>بررسی پلتفرم رسانه‌ای - دادگستری قم</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8f4eb;
+      min-height: 100vh;
+      font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Arial, sans-serif;
+      color: #2c1e12;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 140px;
+      position: relative;
+    }
+
+    /* فونت Estedad برای عناوین */
+    .basmala,
+    .glow-text {
+      font-family: 'Estedad', 'Vazirmatn', sans-serif;
+    }
+
+    #islamic-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .intro {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 16px;
+      padding-top: 50px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .basmala {
+      font-weight: 900; /* ExtraBold */
+      font-size: 2.6rem;
+      color: #a67c00;
+      text-shadow: 0 2px 6px rgba(166, 124, 0, 0.2);
+      margin: 0 auto 25px;
+      line-height: 1.25;
+    }
+
+    .intro p {
+      font-size: 1.45rem;
+      line-height: 2.1;
+      max-width: 680px;
+      margin: 0 auto 40px;
+      padding: 0 16px;
+    }
+
+    /* === افکت درخشش طلایی با فونت فانتزی === */
+    .glow-text {
+      display: block;
+      color: #5a4a2e;
+      position: relative;
+      opacity: 0;
+      animation: fadeInGlow 1.2s forwards;
+      text-shadow: 0 2px 6px rgba(139, 94, 0, 0.1);
+      font-weight: 800;
+    }
+
+    .glow-text.second {
+      animation-delay: 0.3s;
+    }
+
+    .glow-text::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 175, 55, 0.3),
+        transparent
+      );
+      animation: shine 1.8s 0.6s forwards;
+    }
+
+    @keyframes fadeInGlow {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes shine {
+      to {
+        left: 100%;
+      }
+    }
+
+    .divider {
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #d4af37, transparent);
+      margin: 20px auto;
+      border-radius: 2px;
+    }
+
+    .button-zone {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 60px;
+      padding: 16px 0;
+      margin-top: auto;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .glass-tag {
+      position: relative;
+      width: fit-content;
+      min-width: 90px;
+      max-width: 130px;
+      height: 52px;
+      background: rgba(250, 248, 240, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8b6b2f;
+      text-align: center;
+      padding: 12px 10px;
+      line-height: 1.3;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    .glass-tag::before,
+    .glass-tag::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(250, 248, 240, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 50%;
+      top: -3px;
+    }
+
+    .glass-tag::before { left: 8px; }
+    .glass-tag::after { right: 8px; }
+
+    .btn {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      overflow: hidden;
+      box-shadow:
+        -4px -4px 8px rgba(255, 255, 255, 0.6),
+        4px 4px 8px rgba(139, 69, 19, 0.2);
+      background: #f5f0e1;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 28px;
+      background: #f0e9d2;
+      box-shadow:
+        inset -2px -2px 5px rgba(255, 255, 255, 0.7),
+        inset 2px 2px 5px rgba(139, 69, 19, 0.1);
+    }
+
+    .btn-text {
+      position: relative;
+      z-index: 2;
+      font-weight: 800;
+      font-size: 19px;
+      text-align: center;
+      line-height: 1.3;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    .btn.start .btn-text {
+      background: linear-gradient(135deg, #d4af37, #2e7d32);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn.download .btn-text {
+      background: linear-gradient(135deg, #d4af37, #1976d2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    #creative-section {
+      /* این بخش دیگر نیازی نیست زیرا دکمه به صورت لینک عمل می‌کند */
+      display: none;
+    }
+
+    #back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: #f5f0e1;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    @media (max-width: 600px) {
+      .basmala { font-size: 2.2rem; }
+      .intro p { font-size: 1.3rem; }
+      .glow-text { font-size: 1.3rem; }
+      .btn { width: 85px; height: 85px; }
+      .glass-tag {
+        min-width: 80px;
+        max-width: 120px;
+        height: 48px;
+        font-size: 10.5px;
+        padding: 10px 8px;
+      }
+      .button-zone { gap: 45px; padding: 14px 0; }
+      body { padding-bottom: 120px; }
+    }
+  </style>
+
+  <!-- فونت اصلی (Vazirmatn) -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <!-- فونت فانتزی (Estedad) -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/estedad-font@v2.1.0/fonts/estedad-font-face.css" rel="stylesheet">
+</head>
+<body>
+
+  <svg id="islamic-bg" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="islamicPattern" patternUnits="userSpaceOnUse" width="120" height="120">
+        <path d="M60 0 L70 25 L95 35 L70 45 L60 70 L50 45 L25 35 L50 25 Z"
+              fill="none" stroke="#d4af37" stroke-width="1"/>
+        <polygon points="60,15 105,45 105,75 60,105 15,75 15,45"
+                 fill="none" stroke="#d4af37" stroke-width="0.9"/>
+        <circle cx="60" cy="60" r="18" fill="none" stroke="#d4af37" stroke-width="0.7"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#islamicPattern)" />
+  </svg>
+
+  <div id="home-section">
+    <div class="intro">
+      <div class="basmala">بسم الله الرحمن الرحیم</div>
+      <div class="divider"></div>
+      <p>
+        <span class="glow-text">بررسی پلتفرم رسانه ای</span><br>
+        <span class="glow-text second">اداره محترم دادگستری کل استان قم</span>
+      </p>
+    </div>
+
+    <div class="button-zone">
+      <div class="btn-group">
+        <div class="glass-tag">
+          نمایش نسخه<br>تحت وب
+        </div>
+        <!-- تغییر اصلی اینجا: onclick دکمه آغاز تغییر کرد -->
+        <div class="btn start" onclick="goToCreativeContent()">
+          <div class="btn-text">آغاز</div>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <div class="glass-tag">
+          نسخه pdf<br>و گرافیکی
+        </div>
+        <div class="btn download" onclick="downloadFile()">
+          <div class="btn-text">دریافت</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- این قسمت دیگر نمایش داده نمی‌شود و فقط برای سازگاری با کد قبلی باقی مانده -->
+  <div id="creative-section">
+    <button id="back-btn" onclick="showHome()">←</button>
+    <iframe src="https://codepen.io/hdmhh-zr/embed/GgoNxEj?default-tab=result&editable=true"
+            width="100%"
+            height="1000px"
+            frameborder="0"
+            style="border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    </iframe>
+  </div>
+
+  <script>
+    // تابع جدید برای هدایت به صفحه محتوای خلاقانه
+    function goToCreativeContent() {
+      // فرض می‌کنیم که فایل HTML محتوای خلاقانه شما در همین پوشه و با نام 'creative-content.html' ذخیره شده است
+      // اگر نام یا مسیر فایل متفاوت است، آن را اینجا تغییر دهید
+      window.location.href = "creative-content.html";
+    }
+
+    // تابع قبلی برای نمایش صفحه اصلی (اگر هنوز نیاز باشد)
+    function showHome() {
+      document.getElementById('creative-section').style.display = 'none';
+      document.getElementById('home-section').style.display = 'flex';
+      document.body.style.paddingBottom = '140px';
+    }
+
+    // تابع قبلی برای دانلود
+    function downloadFile() {
+      const fileUrl = "https://drive.google.com/uc?export=download&id=1MQIPzveFwGrQYHxiA-m3r13gWtwPJVNC";
+      window.location.href = fileUrl;
+    }
+  </script>
+
+</body>
+</html>
